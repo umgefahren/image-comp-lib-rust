@@ -48,6 +48,15 @@ One should execute the binary with the arguments provided.
 2. The second argument is the input files Path.
 3. The third argument is the output files Path.
 
+## Advanteges compared to PNG
+
+Because of the grid, it's possible to load just specific chunks without loading the entire image.
+With further improvements it might be possible to surpass PNG in compression rate, but I can't prove that.
+
+## Disadvanteges compared to PNG
+
+Because of the clusterisation it takes quite long to calculate a result. It might be possible to improve that, altough this would proably require to abolish Kmeans for another clustering algorithm. One solution to that could be a neuronal net.
+
 ## Contribute
 E-Mail me at hannes.furmans@web.de
 
