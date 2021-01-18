@@ -20,12 +20,6 @@ jobs:
       run: cargo build --verbose --release
     - name: Run tests
       run: cargo test --verbose --release
-    - uses: shadowmoose/GHA-LoC-Badge@1.0.0
-    - name: Make Code Badge
-        id: badge
-        with:
-          debug: true
-          directory: ./
-          badge: ./output/badge.svg
-          patterns: '*.rs'  # Patterns in the format of a '.gitignore' file, separated by pipes.
-          ignore: 'target'
+    - name: Code Lines Badge
+      uses: Kherrisan/cloc-badge-action@1.0.1
+    
