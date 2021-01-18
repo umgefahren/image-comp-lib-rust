@@ -59,7 +59,7 @@ Because of the clusterisation it takes quite long to calculate a result. It migh
 E-Mail me at hannes.furmans@web.de
 
 ## Acknowledgements
-Special thanks to Dr. Arthur Merke for inspiring and mentoring me.
+Special thanks to Dr. Artur Merke for inspiring and mentoring me.
 
 ## DISCLAIMER
 As you can see, I'm not a computer scientist and not a very skilled programmer. I'm just a student taking careful steps in the world of computer science.
