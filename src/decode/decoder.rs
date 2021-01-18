@@ -6,6 +6,9 @@ use crate::encode::grid::grid_obj::from_list;
 use crate::decode::construct::cluster_colors::create_cluster_colors;
 use crate::decode::lists::decode;
 
+/// Decompress Image
+/// inp: Bytes representing the image file
+/// out: RgbImage
 pub fn con_img(inp: &Bytes) -> RgbImage {
     let mut b_iter = inp.iter();
     let mut parts = vec![];

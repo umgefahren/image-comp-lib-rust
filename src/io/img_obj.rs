@@ -1,6 +1,10 @@
 use image::RgbImage;
 use ndarray::Array3;
 
+
+/// Image Object
+/// Rgb Image
+/// Array From the RGB Image
 #[derive(Clone)]
 pub struct Image {
     pub img: RgbImage,

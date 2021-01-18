@@ -1,9 +1,11 @@
 #![allow(dead_code)]
 
+/// Library of the Image Compression Algorithm. Explanation on how it works is available at GitHub:  [ReadMe](https://github.com/umgefahren/image-comp-lib-rust/blob/main/README.md)
+
 #[macro_use]
 pub mod io;
-mod encode;
-mod decode;
+pub mod encode;
+pub mod decode;
 mod debug;
 
 use std::path::PathBuf;
@@ -245,7 +247,7 @@ mod tests {
 
     #[test]
     fn flatten_cluster_colors() {
-        let p = PathBuf::from("./images/img_2.png");
+        let p = PathBuf::from("./images/img_1.png");
         let img = crate::io::load_image::load_image(p);
         let cloud = gen_euclid_cloud(&img);
         let cluster = kmeans_clustering(&cloud, 15);
@@ -286,6 +288,9 @@ fn read_f(target: PathBuf) -> Bytes {
     Bytes::from(buffer)
 }
 
+/// Compress Image
+/// 1. Input --> String describing the input path
+/// 2. Input --> String describing the output path
 pub fn compress_image(org_s: &String, target_s: &String) {
     let org_p = PathBuf::from(org_s);
     let target_p = PathBuf::from(target_s);
@@ -294,6 +299,9 @@ pub fn compress_image(org_s: &String, target_s: &String) {
     write_f(target_p, &bs);
 }
 
+/// Decompress Image
+/// 1. Input --> String describing the input path
+/// 2. Input --> String describing the output path
 pub fn decompress_image(org_s: &String, target_s: &String) {
     let org_p = PathBuf::from(org_s);
     let target_p = PathBuf::from(target_s);

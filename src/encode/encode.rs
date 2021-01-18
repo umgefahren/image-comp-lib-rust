@@ -7,6 +7,11 @@ use crate::encode::compress::deflate::deflate;
 use crate::encode::flatten::cluster_colors::flatten_cc;
 use bytes::{Bytes, BufMut};
 
+
+/// Compress Image As Library
+/// 1. Parameter --> Reference of Image
+/// 2. Parameter --> Minimum Block Size of Grid
+/// 3. Parameter --> Number of Clusters to search for
 pub fn comp_img(img: &Image, b_size: usize, k_n: usize) -> Bytes {
     let cloud = gen_euclid_cloud(img);
     let cluster = kmeans_clustering(&cloud, k_n);
