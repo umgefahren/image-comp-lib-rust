@@ -1,5 +1,5 @@
 [![Actions Status](https://github.com/umgefahren/image-comp-lib-rust/workflows/Rust/badge.svg)](https://github.com/umgefahren/image-comp-lib-rust/actions)
-![Lines of Code](https://tokei.rs/b1/github/image-rs/image-png)
+![Lines of Code](https://tokei.rs/b1/github/umgefahren/image-comp-lib-rust)
 
 # Image Compression Algorithm
 
