@@ -35,6 +35,9 @@ mod tests {
     use crate::encode::encode::comp_img;
     use crate::decode::decoder::con_img;
     use std::fs;
+    use crate::io::load_image::load_image;
+    use ndarray::Array;
+    use std::iter::FromIterator;
 
     #[test]
     fn clustering_test_no_loss() {
@@ -273,6 +276,20 @@ mod tests {
         let img2 = con_img(&bs);
         img2.save("./images/decompressed.png").unwrap();
         assert_eq!(img2, img.img)
+    }
+
+    #[test]
+    fn encode_raw_values() {
+        let p = PathBuf::from("./images/img_4.png");
+        let img = load_image(p.clone());
+        let flat: Vec<u8> = Array::from_iter(img.data.iter()).iter().map(|i| i.to_owned().to_owned()).collect();
+        let b = bytes_list(&flat);
+        let comp = deflate(&b);
+        println!("Compressed Flat image: {}", comp.len());
+        let other_comp = comp_img(&img, 10, 3);
+        println!("Compressed image:      {}", other_comp.len());
+        let org_len = fs::metadata(&p).unwrap().len();
+        println!("Org Image:             {}", org_len);
     }
 }
 
