@@ -64,4 +64,4 @@ E-Mail me at hannes.furmans@web.de
 Special thanks to Dr. Arthur Merke for inspiring me and mentoring me.
 
 ## DISCLAIMER
-As you can see I'm not a computer scientist and not a very scilled programmer.
+As you can see I'm not a computer scientist and not a very skilled programmer.
