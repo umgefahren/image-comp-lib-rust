@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/umgefahren/image-comp-lib-rust.svg?token=QgymLih6uzHxZpY4r8EA&branch=main)](https://travis-ci.com/umgefahren/image-comp-lib-rust)
 [![Actions Status](https://github.com/umgefahren/image-comp-lib-rust/workflows/Rust/badge.svg)](https://github.com/umgefahren/image-comp-lib-rust/actions)
+![Lines of Code](https://tokei.rs/b1/github/image-rs/image-png)
 
 # Image Compression Algorithm
 
