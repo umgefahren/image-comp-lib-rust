@@ -1,4 +1,5 @@
 [![Actions Status](https://github.com/umgefahren/image-comp-lib-rust/workflows/Rust/badge.svg)](https://github.com/umgefahren/image-comp-lib-rust/actions)
+![Lines of Code](https://github.com/umgefahren/image-comp-lib/cloc.svg)
 
 # Image Compression Algorithm
 
