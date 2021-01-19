@@ -5,7 +5,7 @@
 
 A new image compression algorithm.
 
-In the newest version, the algorithm performs in most cases better then PNG. In fact the only image that get's bigger is img_4. The original img_2.png, for example is 12.8 MB; the compressed binary has only a size of 10.1 MB. However this is only achieved through aggressive settings on Zlib and takes quite some time to calculate.
+In the newest version, the algorithm performs in most cases better then PNG. In fact the only image that get's bigger is img_4. The original img_2.png, for example is 12.8 MB; the compressed binary has only a size of 10.1 MB. However this is only achieved through aggressive settings on Zstd and takes quite some time to calculate.
 
 ## How the system works
 ### Clustering
@@ -32,9 +32,9 @@ In this step we, finally calculate the pixel values that are later written into 
 
 The grid, the cluster colors, the lines are converted in Vectors of u8 and then converted into bytes.
 
-### ~~Deflate~~ Zlib
+### ~~Deflate~~ Zstd
 
-Grid and lines bytes representations are compressed with the ~~deflate~~ zlib algorithm. This should achieve the compression and provides an opportunity to optimization.
+Grid and lines bytes representations are compressed with the ~~deflate~~ Zstd algorithm. This should achieve the compression and provides an opportunity to optimization.
 
 ### Write File
 
