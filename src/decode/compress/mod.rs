@@ -1,1 +1,1 @@
-pub mod deflate;
+pub mod compressors;

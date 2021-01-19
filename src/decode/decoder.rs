@@ -1,6 +1,6 @@
 use bytes::Bytes;
 use image::RgbImage;
-use crate::decode::compress::deflate::deflate_dec;
+use crate::decode::compress::compressors::dec_comp_data;
 use crate::decode::construct::lists::{list_f_bytes, create_list};
 use crate::encode::grid::grid_obj::from_list;
 use crate::decode::construct::cluster_colors::create_cluster_colors;
@@ -24,7 +24,7 @@ pub fn con_img(inp: &Bytes) -> RgbImage {
         }
         let mut b = Bytes::from(buf);
         if x != 1 {
-            b = deflate_dec(&b);
+            b = dec_comp_data(&b);
         }
         parts.push(b);
     }

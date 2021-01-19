@@ -3,7 +3,7 @@ use crate::encode::clustering::gen_point_cloud::{gen_euclid_cloud, gen_point_clo
 use crate::encode::clustering::clustering_methods::kmeans_clustering;
 use crate::encode::grid::grid_ops::{calc_cluster_map, calc_grid, calc_cluster_colors, calc_data_lists};
 use crate::encode::flatten::lists::{flatten_list, bytes_list};
-use crate::encode::compress::deflate::deflate;
+use crate::encode::compress::compressors::comp_data;
 use crate::encode::flatten::cluster_colors::flatten_cc;
 use bytes::{Bytes, BufMut};
 
@@ -27,11 +27,11 @@ pub fn comp_img(img: &Image, b_size: usize, k_n: usize) -> Bytes {
     let abs_f = flatten_list(abs);
     let norm_b = bytes_list(&norm_f);
     let abs_b = bytes_list(&abs_f);
-    let norm_c = deflate(&norm_b);
-    let abs_c = deflate(&abs_b);
+    let norm_c = comp_data(&norm_b);
+    let abs_c = comp_data(&abs_b);
     let gl = grid.to_list();
     let gl_b = bytes_list(&gl);
-    let gl_c = deflate(&gl_b);
+    let gl_c = comp_data(&gl_b);
     let cc = flatten_cc(&cluster_colors);
     let cc_b = bytes_list(&cc);
     let parts = [gl_c, cc_b, norm_c, abs_c];

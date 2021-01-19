@@ -24,8 +24,8 @@ mod tests {
     use crate::debug::compare_img;
     use crate::encode::flatten::lists::{flatten_list, bytes_list};
     use crate::decode::construct::lists::{create_list, list_f_bytes};
-    use crate::encode::compress::deflate::deflate;
-    use crate::decode::compress::deflate::deflate_dec;
+    use crate::encode::compress::compressors::comp_data;
+    use crate::decode::compress::compressors::dec_comp_data;
     use crate::encode::grid::grid_obj::from_list;
     use crate::encode::grid::grid_ops::{calc_cluster_map, calc_grid, calc_data_lists, calc_cluster_colors};
     use crate::encode::clustering::gen_point_cloud::{gen_point_cloud, gen_euclid_cloud};
@@ -210,12 +210,12 @@ mod tests {
         let abs = &lists[1];
         let norm_f = flatten_list(norm);
         let bytes_n = bytes_list(&norm_f);
-        let comp_n = deflate(&bytes_n);
-        let decomp_n = deflate_dec(&comp_n);
+        let comp_n = comp_data(&bytes_n);
+        let decomp_n = dec_comp_data(&comp_n);
         let abs_f = flatten_list(abs);
         let bytes_a = bytes_list(&abs_f);
-        let comp_a = deflate(&bytes_a);
-        let decomp_a = deflate_dec(&comp_a);
+        let comp_a = comp_data(&bytes_a);
+        let decomp_a = dec_comp_data(&comp_a);
         let decomp_n_l = list_f_bytes(&decomp_n);
         let decomp_a_l = list_f_bytes(&decomp_a);
         let norm_r = create_list(decomp_n_l);
@@ -239,10 +239,10 @@ mod tests {
         let grid = calc_grid(&cluster_map, 10);
         let g_list = grid.to_list();
         let g_b_list = bytes_list(&g_list);
-        let comp_gb_list = deflate(&g_b_list);
+        let comp_gb_list = comp_data(&g_b_list);
         println!("Uncompressed size: {}", g_b_list.len());
         println!("Compressed size:   {}", comp_gb_list.len());
-        let dec_comp_gb_list = deflate_dec(&comp_gb_list);
+        let dec_comp_gb_list = dec_comp_data(&comp_gb_list);
         let dec_g_list = list_f_bytes(&dec_comp_gb_list);
         let grid_n = from_list(&dec_g_list);
         assert_eq!(grid, grid_n);
@@ -258,7 +258,7 @@ mod tests {
         let cluster_colors = calc_cluster_colors(&cluster, &points);
         let flat_cc = flatten_cc(&cluster_colors);
         let cc_b = bytes_list(&flat_cc);
-        let comp_cc_b = deflate(&cc_b);
+        let comp_cc_b = comp_data(&cc_b);
         println!("Uncompressed Size: {}", cc_b.len());
         println!("Compressed Size:   {}", comp_cc_b.len());
         let ret_cc = create_cluster_colors(&flat_cc);
@@ -284,7 +284,7 @@ mod tests {
         let img = load_image(p.clone());
         let flat: Vec<u8> = Array::from_iter(img.data.iter()).iter().map(|i| i.to_owned().to_owned()).collect();
         let b = bytes_list(&flat);
-        let comp = deflate(&b);
+        let comp = comp_data(&b);
         println!("Compressed Flat image: {}", comp.len());
         let other_comp = comp_img(&img, 10, 3);
         println!("Compressed image:      {}", other_comp.len());
