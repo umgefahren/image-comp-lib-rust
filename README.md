@@ -5,7 +5,7 @@
 
 A new image compression algorithm.
 
-In this release version, the algorithm performs worse than PNG in most cases. In fact, the only image, where the algorithm outperforms PNG is the white void of img_3.png. However, the algorithm produces just slightly larger files then PNG. For example, img_2.png is about 12.8 MB, the resulting binary is 12.9 MB.
+In the newest version, the algorithm performs in most cases better then PNG. In fact the only image that get's bigger is img_4. The original img_2.png, for example is 12.8 MB; the compressed binary has only a size of 10.1 MB. However this is only achieved through aggressive settings on Zlib and takes quite some time to calculate.
 
 ## How the system works
 ### Clustering
