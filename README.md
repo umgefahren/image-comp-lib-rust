@@ -5,7 +5,7 @@
 [![Downloads](https://badgen.net/github/assets-dl/umgefahren/image-comp-lib-rust/v0.0.1)](https://github.com/umgefahren/image-comp-lib-rust/releases/tag/v0.0.1)
 
 
-# Image Compression Algorithm
+# Image Compression Algorithm 🦭
 
 A new image compression algorithm.
 
