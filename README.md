@@ -32,9 +32,9 @@ In this step we, finally calculate the pixel values that are later written into 
 
 The grid, the cluster colors, the lines are converted in Vectors of u8 and then converted into bytes.
 
-### Deflate
+### ~~Deflate~~ Zlib
 
-Grid and lines bytes representations are compressed with the deflate algorithm. This should achieve the compression and provides an opportunity to optimization.
+Grid and lines bytes representations are compressed with the ~~deflate~~ zlib algorithm. This should achieve the compression and provides an opportunity to optimization.
 
 ### Write File
 
