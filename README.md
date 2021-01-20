@@ -7,9 +7,50 @@
 
 # Image Compression Algorithm 🦭
 
-A new image compression algorithm.
+A new lossless image compression algorithm.
 
-In the newest version, the algorithm performs in most cases better then PNG. In fact the only image that get's bigger is img_4. The original img_2.png, for example is 12.8 MB; the compressed binary has only a size of 10.1 MB. However this is only achieved through aggressive settings on Zstd and takes quite some time to calculate.
+In the newest version the algorithm performs rather good, but manages to surpass PNG only in about 25%.
+
+Here are the file sizes of the original images (optipng) and the sizes of the compressed image (with the algorithm). The size on the volume may be different.
+
+| File name | File size (optimized PNG) in Byte | File size (image-compressor) in Byte |
+|-----------|-----------------------------------|--------------------------------------|
+| img_1     | 12,537,083                        | 12,847,145                           |
+| img_2     | 10,791,729                        | 10,062,265                           |
+| img_3     | 00,001,574                        | 00,001,781                           |
+| img_4     | 14,076,373                        | 18,827,534                           |
+
+## Using the Algorithm
+### Using the binaries
+Binaries are provided. They can be found at the releases or at the buttons at the beginning of this readme.
+
+### Compiling from source
+The algorithm can be compiled from source on Windows / Mac OS / Linux without satisfying any outer dependencies, apart from Rust.
+1. Clone this repository:
+   
+    `git clone https://github.com/umgefahren/image-comp-lib-rust/`
+2. Compile the source code
+    
+    a) Make sure you have rustup installed. If not  install it: [rustup](https://rustup.rs)
+    
+    b) Compile:
+    
+    `cargo build --release`
+    
+    The resulting binary can be found at `./target/release/image-compressor`
+    
+    Compiling with the `--release` flag is not required but highly recommended. Otherwise the compression will take ages.
+
+### How to use the shipped binariers
+
+One should execute the binary with the arguments provided.
+1. The first argument specifies the behavior. Pass `comp` for compression. Pass `dec` for decompression. 
+2. The second argument is the input files Path.
+3. The third argument is the output files Path.
+
+If `-h` or `--help` is passed it will give you the same instructions.
+
+The algorithm only supports 8-Bit RGB at the present moment. It should be able to compress every common image format (f.e. PNG, JPEG). But it makes no sense to compress a lossy image like a JPEG.
 
 ## How the system works
 ### Clustering
@@ -44,12 +85,7 @@ Grid and lines bytes representations are compressed with the ~~deflate~~ Zstd al
 
 The resulting binary is just a list of the relevant compressed objects.
 
-## How to use the shipped binariers
 
-One should execute the binary with the arguments provided.
-1. The first argument is 'dec' if this call should make compression.
-2. The second argument is the input files Path.
-3. The third argument is the output files Path.
 
 ## Advantages compared to PNG
 

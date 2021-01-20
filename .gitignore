@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+/images/to_opt
 /target
 /out
 Cargo.lock
@@ -15,4 +16,4 @@ Cargo.lock
 **/*.rs.bk
 /out
 >>>>>>> ea3bca70084d6dfd1bed96149073ee272e3ee9c8
-build.sh
+build_universal.sh
