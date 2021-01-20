@@ -71,7 +71,7 @@ In the next step we lay a grid on top of the cluster map. The chunks of the grid
 
 This maybe a better illustration. Every white pixel, symbolizes a gird with absolute values. The three colors are the minimum values of each cluster, from that value every pixel value ist calculated.
 
-![image_out_grid_detailed](https://github.com/umgefahren/image-comp-lib-rust/images/cluster_color_grid.png)
+![image_out_grid_detailed](images/cluster_color_grid.png)
 
 ### Calculating Lists
 
