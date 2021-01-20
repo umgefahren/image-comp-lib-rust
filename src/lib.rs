@@ -137,6 +137,63 @@ mod tests {
     }
 
     #[test]
+    fn grid_debug_img() {
+        let p = PathBuf::from("./images/img_2.png");
+        let img = crate::io::load_image::load_image(p);
+        let mut res_img = RgbImage::new(img.img.dimensions().0, img.img.dimensions().1);
+        let cloud = crate::encode::clustering::gen_point_cloud::gen_euclid_cloud(&img);
+        let cluster = crate::encode::clustering::clustering_methods::kmeans_clustering(&cloud, 3);
+        let points = crate::encode::clustering::gen_point_cloud::gen_point_cloud(&img);
+        let dims = &img.dim();
+        let cluster_map = crate::encode::grid::grid_ops::calc_cluster_map(&cluster, &points, *dims);
+        let grid = crate::encode::grid::grid_ops::calc_grid(&cluster_map, 10);
+        let cluster_colors = calc_cluster_colors(&cluster, &points);
+        let w_len = grid.w * grid.wx + 1;
+        let h_len = grid.h * grid.hx + 1;
+        for idy in 0..grid.hx {
+            // println!("{:?}", x_arr);
+            for idx in 0..grid.wx {
+                let mut real_w = grid.w;
+                let mut real_h = grid.h;
+                if ((idx + 1) * grid.w) >= w_len {
+                    real_w -= 1;
+                }
+                if ((idy + 1) * grid.h) >= h_len {
+                    real_h -= 1;
+                }
+                let code = &grid.data[[idx, idy]].to_owned();
+                let base_color = if *code == 16 {
+                    Rgb([255 as u8, 255 as u8, 255 as u8])
+                } else {
+                    Rgb(cluster_colors.get(code).unwrap().to_owned())
+                };
+                let mut counter = 0;
+                // println!("Idxe: {} Idye: {}", (idx + 1) * grid.w, (idy + 1) * grid.h);
+                for x in (idx * grid.w)..((idx + 1) * grid.w) {
+                    if x >= w_len - 1 {
+                        continue
+                    }
+                    let y_iter: Vec<usize> = if counter % 2 == 0 {
+                        ((idy * grid.h)..(idy + 1) * grid.h).collect()
+                    } else {
+                        ((idy * grid.h)..(idy + 1) * grid.h).rev().collect()
+                    };
+                    counter += 1;
+                    // let y_iter: Vec<usize> = ((idy * grid.h)..(idy + 1) * grid.h).collect();
+                    for y in y_iter {
+                        // println!("x: {} idx: {} y: {} idy: {} {:?}", x, idx, y, idy, res_img.dimensions());
+                        if y >= h_len - 1 {
+                            continue
+                        }
+                        res_img.put_pixel(x as u32, y as u32, base_color);
+                    }
+                }
+            }
+        }
+        res_img.save("images/cluster_color_grid.png").unwrap();
+    }
+
+    #[test]
     fn points_test_debug() {
         let p = PathBuf::from("./images/img_2.png");
         let img = crate::io::load_image::load_image(p);
