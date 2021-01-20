@@ -128,3 +128,24 @@ The hole folder with all the compressed images is 305,598,693 Bytes in size. It 
 | nightshot_iso_1600.ppm | 1.501047996887146                               | 1.7743906785849834       |
 | nightshot_iso_100.ppm  | 2.251600481220427                               | 3.0845039578711773       |
 | leaves_iso_200.ppm     | 1.3158267828823695                              | 1.7839604041821022       |
+
+### Weissman Scores
+
+Weissman Scores. Calculated with an Alpha of 1.0. Gzip Baseline.
+
+| File                   | Weissman Score        |
+|------------------------|-----------------------|
+| spider_web.ppm         | 0.19965705689076957   |
+| deer.ppm               | 0.17417168014135764   |
+| fireworks.ppm          | 0.8091634841381454    |
+| artificial.ppm         | -0.2316060244844763   |
+| bridge.ppm             | 0.22776803956557698   |
+| flower_foveon.ppm      | -0.4676227502970183   |
+| big_tree.ppm           | 0.38163765223899987   |
+| cathedral.ppm          | 0.3565143033247531    |
+| hdr.ppm                | 0.017833048215231392  |
+| leaves_iso_1600.ppm    | 0.04042012185180071   |
+| big_building.ppm       | 0.3720446250581359    |
+| nightshot_iso_1600.ppm | 0.14211182900071634   |
+| nightshot_iso_100.ppm  | 0.14370884701981224   |
+| leaves_iso_200.ppm     | -0.055738991257489635 |
