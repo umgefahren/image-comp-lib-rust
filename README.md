@@ -69,6 +69,10 @@ In the next step we lay a grid on top of the cluster map. The chunks of the grid
 
 ![alt_text](images/out_grid.png)
 
+This maybe a better illustration. Every white pixel, symbolizes a gird with absolute values. The three colors are the minimum values of each cluster, from that value every pixel value ist calculated.
+
+![image_out_grid_detailed](https://github.com/umgefahren/image-comp-lib-rust/images/cluster_color_grid.png)
+
 ### Calculating Lists
 
 In this step we, finally calculate the pixel values that are later written into the file. Every chunk is calculated according to the grid's perception of absolute or relative value. Every chucks pixel values are added to a super list of relative or absolute pixel values. The pixel values are calculated in wiggly lines. Every cluster has a minimum pixel value. This value is according to the minimum R, G, B value in that chunk. The resulting pixel value is an addition of this chunk value and the encoded pixel value.
