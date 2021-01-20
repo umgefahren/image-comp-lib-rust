@@ -11,7 +11,7 @@ A new lossless image compression algorithm.
 
 In the newest version the algorithm performs rather good, but manages to surpass PNG only in about 25%.
 
-Here are the file sizes of the original images (optipng) and the sizes of the compressed image (with the algorithm). The size on the volume may be different.
+Here are the file sizes of the original images (optipng) and the sizes of the compressed image (with the algorithm). The size on larger volumes may be different.
 
 | File name | File size (optimized PNG) in Byte | File size (image-compressor) in Byte |
 |-----------|-----------------------------------|--------------------------------------|
@@ -25,7 +25,7 @@ Here are the file sizes of the original images (optipng) and the sizes of the co
 Binaries are provided. They can be found at the releases or at the buttons at the beginning of this readme.
 
 ### Compiling from source
-The algorithm can be compiled from source on Windows / Mac OS / Linux without satisfying any outer dependencies, apart from Rust.
+The algorithm can be compiled from source on Windows / Mac OS / Linux without any external dependencies outside Rust.
 1. Clone this repository:
    
     `git clone https://github.com/umgefahren/image-comp-lib-rust/`
@@ -50,7 +50,7 @@ One should execute the binary with the arguments provided.
 
 If `-h` or `--help` is passed it will give you the same instructions.
 
-The algorithm only supports 8-Bit RGB at the present moment. It should be able to compress every common image format (f.e. PNG, JPEG). But it makes no sense to compress a lossy image like a JPEG.
+The algorithm only supports 8-Bit RGB at the moment. It should be able to compress every common image format (f.e. PNG, JPEG). But it makes no sense to compress a lossy image like a JPEG.
 
 ## How the system works
 ### Clustering
@@ -65,17 +65,17 @@ After defining the clusters, we calculate a cluster map, that removes the color 
 
 ### Grid
 
-In the next step we lay a grid on top of the cluster map. The chunks of the grids are not fixed size. They vary in size near the edges. For every grid, we check if all pixels in a grid belong to the same cluster. If this is given, the pixel is calculated relative, otherwise absolute. The gird contains for every chunk a value that determines the cluster or that the chunk has to be calculated absolute. Here is an illustration of this grid map. Every white pixel, symbolizes an absolute chunk.
+In the next step we lay a grid on top of the cluster map. The chunks of the grids are not fixed size. They vary in size near the edges. For every grid, we check if all pixels in a grid belong to the same cluster. If this is given, the pixel is calculated relative, otherwise absolute. The grid contains for every chunk a value that determines the cluster or that the chunk has to be calculated absolute. Here is an illustration of this grid map. Every white pixel, symbolizes an absolute chunk.
 
 ![alt_text](images/out_grid.png)
 
-This maybe a better illustration. Every white pixel, symbolizes a gird with absolute values. The three colors are the minimum values of each cluster, from that value every pixel value ist calculated.
+This maybe a better illustration. Every white pixel, symbolizes a grid with absolute values. The three colors are the minimum values of each cluster, from that value every pixel value is calculated.
 
 ![image_out_grid_detailed](images/cluster_color_grid.png)
 
 ### Calculating Lists
 
-In this step we, finally calculate the pixel values that are later written into the file. Every chunk is calculated according to the grid's perception of absolute or relative value. Every chucks pixel values are added to a super list of relative or absolute pixel values. The pixel values are calculated in wiggly lines. Every cluster has a minimum pixel value. This value is according to the minimum R, G, B value in that chunk. The resulting pixel value is an addition of this chunk value and the encoded pixel value.
+In this step, we finally calculate the pixel values that are later written into the file. Every chunk is calculated according to the grid's perception of absolute or relative value. Every chucks pixel values are added to a super list of relative or absolute pixel values. The pixel values are calculated in wiggly lines. Every cluster has a minimum pixel value. This value is according to the minimum R, G, B value in that chunk. The resulting pixel value is an addition of this chunk value and the encoded pixel value.
 
 ### Flatten and Byte conversion
 
@@ -108,7 +108,7 @@ As you can see, I'm not a computer scientist and not a very skilled programmer. 
 ## Detailed test results
 
 Using [this](http://imagecompression.info/test_images/rgb8bit.zip) Dataset i achieved the following results:
-The hole folder with all the compressed images is 305,598,693 Bytes in size. It took 405.2812011241913 Seconds to compress them. It took 9.863522052764893 Seconds to decompress them. My compression ratio is 1.539966344 on the hole image set.
+The hole folder with all the compressed images is 305,598,693 Bytes in size. It took 405.28 Seconds to compress them. It took 9.86 Seconds to decompress them. My compression ratio is 1.54 on the hole image set.
 
 | Image                  | Compression Ratio (image compression algorithm) | Compression Ration (PNG) |
 |------------------------|-------------------------------------------------|--------------------------|
