@@ -100,3 +100,25 @@ E-Mail me at hannes.furmans@web.de
 
 ## DISCLAIMER
 As you can see, I'm not a computer scientist and not a very skilled programmer. I'm just a student taking careful steps in the world of computer science.
+
+## Detailed test results
+
+Using [this](http://imagecompression.info/test_images/rgb8bit.zip) Dataset i achieved the following results:
+The hole folder with all the compressed images is 305,598,693 Bytes in size. It took 405.2812011241913 Seconds to compress them. It took 9.863522052764893 Seconds to decompress them. My compression ratio is 1.539966344 on the hole image set.
+
+| Image                  | Compression Ratio  |
+|------------------------|--------------------|
+| spider_web.ppm         | 2.14235671557331   |
+| deer.ppm               | 1.2424318516015507 |
+| fireworks.ppm          | 3.642381743674327  |
+| artificial.ppm         | 12.25476523000428  |
+| bridge.ppm             | 1.2273064711294759 |
+| flower_foveon.ppm      | 2.4469685311217293 |
+| big_tree.ppm           | 1.2789847127858722 |
+| cathedral.ppm          | 1.5089509013690656 |
+| hdr.ppm                | 1.9960575653205344 |
+| leaves_iso_1600.ppm    | 1.203903570936856  |
+| big_building.ppm       | 1.3922857035699863 |
+| nightshot_iso_1600.ppm | 1.501047996887146  |
+| nightshot_iso_100.ppm  | 2.251600481220427  |
+| leaves_iso_200.ppm     | 1.3158267828823695 |
