@@ -1,3 +1,5 @@
+![Project Screen](Project_Screen.png)
+
 [![Actions Status](https://github.com/umgefahren/image-comp-lib-rust/workflows/Rust/badge.svg)](https://github.com/umgefahren/image-comp-lib-rust/actions)
 ![Lines of Code](https://github.com/umgefahren/image-comp-lib-rust/blob/main/cloc.svg)
 [![Release Latest](https://badgen.net/github/release/umgefahren/image-comp-lib-rust)](https://github.com/umgefahren/image-comp-lib-rust/releases/tag/v0.0.1)
