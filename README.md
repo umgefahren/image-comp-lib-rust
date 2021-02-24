@@ -101,8 +101,6 @@ Because of the grid, it's possible to load just specific chunks without loading 
 
 Because of the clusterisation it takes quite long to calculate a result. It might be possible to improve that, although this would probably require to abolish Kmeans for another clustering algorithm. One solution to that could be a neuronal net.
 
-## Contribute
-E-Mail me at hannes.furmans@web.de
 
 ## DISCLAIMER
 As you can see, I'm not a computer scientist and not a very skilled programmer. I'm just a student taking careful steps in the world of computer science.
