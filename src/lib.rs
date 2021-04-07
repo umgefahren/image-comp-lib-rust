@@ -48,7 +48,7 @@ mod tests {
         let cluster = crate::encode::clustering::clustering_methods::kmeans_clustering(&cloud, 3);
         let mut size: usize = 0;
         for c in cluster.iter() {
-            size += c.1.len();
+            size += c.len();
         }
         assert_eq!(size, pixel_count);
     }
@@ -64,7 +64,7 @@ mod tests {
         for (_idx, c) in cluster.iter().enumerate() {
             let mut add_color: [u32; 3] = [0, 0, 0];
             let mut counter: u32 = 1;
-            for p in &c.1 {
+            for p in c {
                 counter += 1;
                 add_color[0] = add_color[0] + points[*p][2];
                 add_color[1] = add_color[1] + points[*p][3];
@@ -94,7 +94,7 @@ mod tests {
                 def_color = Rgb([0, 0, 0]);
             }
             */
-            for p in &c.1 {
+            for p in c.iter() {
                 debug_img.put_pixel(points[*p][0] as u32, points[*p][1] as u32, def_color);
             }
         }
@@ -153,14 +153,14 @@ mod tests {
         for idy in 0..grid.hx {
             // println!("{:?}", x_arr);
             for idx in 0..grid.wx {
-                let mut real_w = grid.w;
-                let mut real_h = grid.h;
-                if ((idx + 1) * grid.w) >= w_len {
-                    real_w -= 1;
-                }
-                if ((idy + 1) * grid.h) >= h_len {
-                    real_h -= 1;
-                }
+                // let mut _real_w = grid.w;
+                // let mut _real_h = grid.h;
+                // if ((idx + 1) * grid.w) >= w_len {
+                //     real_w -= 1;
+                // }
+                // if ((idy + 1) * grid.h) >= h_len {
+                //     real_h -= 1;
+                // }
                 let code = &grid.data[[idx, idy]].to_owned();
                 let base_color = if *code == 16 {
                     Rgb([255 as u8, 255 as u8, 255 as u8])

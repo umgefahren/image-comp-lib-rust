@@ -1,20 +1,20 @@
 use crate::io::img_obj::Image;
 use ndarray::Axis;
-use cogset::Euclid;
 
-pub fn gen_euclid_cloud(img: &Image) -> Vec<Euclid<[f64; 5]>> {
+pub fn gen_euclid_cloud(img: &Image) -> Vec<[f64; 5]> {
     let arr = &img.data;
     let x_len = img.data.dim().2 as f64;
     let y_len = img.data.dim().1 as f64;
-    let mut super_vec: Vec<Euclid<[f64; 5]>> = vec![];
+    let mut super_vec: Vec<[f64; 5]> = vec![];
     for (y, item) in arr.axis_iter(Axis(1)).enumerate() {
         for (x, pixel) in item.axis_iter(Axis(1)).enumerate() {
             // super_vec.push(Euclid([pixel[0] as f64, pixel[1] as f64, pixel[2] as f64]));
-            super_vec.push(Euclid([pixel[0] as f64, pixel[1] as f64, pixel[2] as f64, (x as f64 / x_len) * 255.0, (y as f64 / y_len) * 255.0]));
+            super_vec.push([pixel[0] as f64, pixel[1] as f64, pixel[2] as f64, (x as f64 / x_len) * 255.0, (y as f64 / y_len) * 255.0]);
         }
     }
     super_vec
 }
+
 
 pub fn gen_point_cloud(img: &Image) -> Vec<[u32; 5]> {
     let arr = &img.data;
