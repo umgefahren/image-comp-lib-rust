@@ -15,7 +15,7 @@ name = "image-compressor"
 path = "src/main.rs"
 
 [dependencies]
-ndarray = "0.14.0"
+ndarray = "0.15.1"
 image = "0.23.12"
 nshare = {version = "0.2.0", features=["image", "ndarray"]}
 rdrand = "0.7.0"
