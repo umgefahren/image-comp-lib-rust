@@ -17,9 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: cargo build --verbose --release
+      run: cargo build +nightly --verbose --release
     - name: Run tests
-      run: cargo test --verbose --release
+      run: cargo test +nighlty --verbose --release
     - name: Code Lines Badge
       uses: Kherrisan/cloc-badge-action@1.0.1
     
