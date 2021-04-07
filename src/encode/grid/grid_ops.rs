@@ -1,4 +1,3 @@
-use cogset::Euclid;
 use ndarray::{Array, ArrayBase, OwnedRepr, Dim, Axis, Array2, ArrayView, Ix3, s};
 use crate::encode::grid::grid_obj::Grid;
 use crate::io::img_obj::Image;
@@ -6,10 +5,10 @@ use image::{Rgb, RgbImage};
 use std::collections::HashMap;
 use crate::encode::clustering::cluster_color::calc_min;
 
-pub fn calc_cluster_map(cluster: &[(Euclid<[f64; 5]>, Vec<usize>)], points: &[[u32; 5]], shape: [usize; 2]) -> ArrayBase<OwnedRepr<usize>, Dim<[usize; 2]>> {
+pub fn calc_cluster_map(cluster: &[Vec<usize>], points: &[[u32; 5]], shape: [usize; 2]) -> ArrayBase<OwnedRepr<usize>, Dim<[usize; 2]>> {
     let mut arr = Array::zeros(shape);
     for (id, c) in cluster.iter().enumerate() {
-        for idx in &c.1 {
+        for idx in c {
             let x = points[*idx][0] as usize;
             let y = points[*idx][1] as usize;
             arr[[x, y]] = id;
@@ -131,10 +130,10 @@ fn calc_chunck_rel(chunck: &ArrayView<u8, Ix3>, color: &[u8; 3]) -> Vec<[u8; 3]>
     pixels.iter().map(|p| { [p[0] - c_r, p[1] - c_g, p[2] - c_b] }).collect()
 }
 
-pub fn calc_cluster_colors(clusters: &[(Euclid<[f64; 5]>, Vec<usize>)], points: &[[u32; 5]]) -> HashMap<u8, [u8; 3]> {
+pub fn calc_cluster_colors(clusters: &[Vec<usize>], points: &[[u32; 5]]) -> HashMap<u8, [u8; 3]> {
     let mut cluster_colors = HashMap::new();
     for (idx, cluster) in clusters.iter().enumerate() {
-        cluster_colors.insert(idx as u8, calc_min(&cluster.1, points));
+        cluster_colors.insert(idx as u8, calc_min(cluster, points));
     }
     cluster_colors
 }

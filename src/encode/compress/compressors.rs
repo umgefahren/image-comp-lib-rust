@@ -18,7 +18,7 @@ pub fn comp_data(inp: &Bytes) -> Bytes {
     let data= inp.to_vec();
     let mut encoder = Encoder::new(Vec::new(), 21).unwrap();
     let n_counters = num_cpus::get() as u32;
-    encoder.multithread(n_counters);
+    encoder.multithread(n_counters).unwrap();
     encoder.write_all(&data).unwrap();
     let encoded_data = encoder.finish().unwrap();
     bytes_list(&encoded_data)
