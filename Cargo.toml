@@ -18,7 +18,7 @@ path = "src/main.rs"
 ndarray = "0.14.0"
 image = "0.23.12"
 nshare = {version = "0.2.0", features=["image", "ndarray"]}
-rdrand = "0.7.0"
+rdrand = "0.8.0"
 bytes = "1.0.1"
 libflate = "1.0.3"
 average = "0.12.0"
