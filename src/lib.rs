@@ -3,9 +3,14 @@
 /// Library of the Image Compression Algorithm. Explanation on how it works is available at GitHub:  [ReadMe](https://github.com/umgefahren/image-comp-lib-rust/blob/main/README.md)
 
 #[macro_use]
+
+#[doc(hidden)]
 pub mod io;
+#[doc(hidden)]
 pub mod encode;
+#[doc(hidden)]
 pub mod decode;
+
 mod debug;
 
 use std::path::PathBuf;
@@ -54,7 +59,8 @@ mod tests {
     }
 
     #[test]
-    fn clustering_test_debug() -> ImageResult<()>{
+    #[ignore]
+    fn clustering_test_debug() {
         let p = PathBuf::from("./images/img_2.png");
         let img = crate::io::load_image::load_image(p);
         let cloud = crate::encode::clustering::gen_point_cloud::gen_euclid_cloud(&img);
@@ -98,10 +104,13 @@ mod tests {
                 debug_img.put_pixel(points[*p][0] as u32, points[*p][1] as u32, def_color);
             }
         }
-        debug_img.save("./images/out.png")
+
+        #[cfg(feature = "debug-out-img")]
+        debug_img.save("./images/out.png");
     }
 
     #[test]
+    #[ignore]
     fn cluster_map_test() {
         let p = PathBuf::from("./images/img_2.png");
         let img = crate::io::load_image::load_image(p);
@@ -117,11 +126,13 @@ mod tests {
                 debug_img.put_pixel(x as u32, y as u32, Rgb([val, val, val]))
             }
         }
+        #[cfg(feature = "debug-out-img")]
         debug_img.save("./images/out_cluster_map.png").unwrap();
         assert_eq!(dims, ret.shape());
     }
 
     #[test]
+    #[ignore]
     fn grid_map_test_and_debug() {
         let p = PathBuf::from("./images/img_2.png");
         let img = crate::io::load_image::load_image(p);
@@ -132,11 +143,13 @@ mod tests {
         let cluster_map = crate::encode::grid::grid_ops::calc_cluster_map(&cluster, &points, *dims);
         let grid = crate::encode::grid::grid_ops::calc_grid(&cluster_map, 10);
         let img_out_grid = grid.render();
+        #[cfg(feature = "debug-out-img")]
         img_out_grid.save("./images/out_grid.png").unwrap();
         assert_eq!(*dims, grid.image_dim());
     }
 
     #[test]
+    #[ignore]
     fn grid_debug_img() {
         let p = PathBuf::from("./images/img_2.png");
         let img = crate::io::load_image::load_image(p);
@@ -190,10 +203,12 @@ mod tests {
                 }
             }
         }
+        #[cfg(feature = "debug-out-img")]
         res_img.save("images/cluster_color_grid.png").unwrap();
     }
 
     #[test]
+    #[ignore]
     fn points_test_debug() {
         let p = PathBuf::from("./images/img_2.png");
         let img = crate::io::load_image::load_image(p);
@@ -202,6 +217,7 @@ mod tests {
         for p in points {
             debug_img.put_pixel(p[0], p[1], Rgb([p[2] as u8, p[3] as u8, p[4] as u8]));
         }
+        #[cfg(feature = "debug-out-img")]
         debug_img.save("./images/out_points.png").unwrap();
     }
 
@@ -228,6 +244,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn list_debug() {
         let p = PathBuf::from("./images/img_1.png");
         let img = crate::io::load_image::load_image(p);
@@ -247,6 +264,7 @@ mod tests {
         let abs_r = create_list(abs_f);
         let res_lists = [norm_r, abs_r];
         let res_img = decode(&res_lists[0], &res_lists[1], &grid, &cluster_colors);
+        #[cfg(feature = "debug-out-img")]
         res_img.save("./images/decoded_list.png").unwrap();
         compare_img(&img.img, &res_img);
         assert_eq!(img.img, res_img);
@@ -281,6 +299,7 @@ mod tests {
         println!("Uncompressed Size: {}", bytes_n.len() + bytes_a.len());
         println!("Compressed size:   {}", comp_n.len() + comp_a.len());
         let res_img = decode(&res_lists[0], &res_lists[1], &grid, &cluster_colors);
+        #[cfg(feature = "debug-out-img")]
         res_img.save("./images/decoded_comp_list.png").unwrap();
         assert_eq!(lists, res_lists);
     }
@@ -331,6 +350,7 @@ mod tests {
         println!("Compressed Img Size {} Bytes", bs.len());
         println!("Original Img Size   {} Bytes", org_len);
         let img2 = con_img(&bs);
+        #[cfg(feature = "debug-out-img")]
         img2.save("./images/decompressed.png").unwrap();
         assert_eq!(img2, img.img)
     }
