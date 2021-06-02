@@ -1,25 +1,62 @@
 name: Rust
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  push
 
 env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  build-and-test-native:
 
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    
+    runs-on: ${{ matrix.platform }}
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --verbose --release
-    - name: Run tests
-      run: cargo test --verbose --release
-    - name: Code Lines Badge
-      uses: Kherrisan/cloc-badge-action@1.0.1
+      - uses: actions/checkout@v2
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+            toolchain: nightly
+            override: true
+            components: rustfmt, clippy
+
+      # `cargo check` command here will use installed `nightly`
+      # as it is set as an "override" for current directory
+
+      - name: Run cargo check
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+      
+      - name: Run cargo test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+      
+      - name: Run cargo build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+  
+  build-and-test-mac-arm:
+    runs-on: [macos-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+            toolchain: nightly
+            override: true
+            target: aarch64-apple-darwin
+            components: rustfmt, clippy
+      
+      
+      - name: Run cargo build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
     
