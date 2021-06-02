@@ -16,7 +16,11 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Get Files (with lfs)
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+        
       - name: Install latest nightly
         uses: actions-rs/toolchain@v1
         with:
