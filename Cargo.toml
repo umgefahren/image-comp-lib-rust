@@ -37,7 +37,7 @@ rdrand = "0.8.0"
 bytes = "1.0.1"
 libflate = "1.0.3"
 average = "0.13.1"
-zstd = {version = "0.8.2+zstd.1.4.8", features=["thin"]}
+zstd = {version = "0.9.1+zstd.1.4.8", features=["thin"]}
 kmeans = "0.2.0"
 
 [dev-dependencies]
