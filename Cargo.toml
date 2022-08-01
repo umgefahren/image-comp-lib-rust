@@ -30,7 +30,7 @@ overflow-checks = false
 lto = true
 
 [dependencies]
-ndarray = "0.14.0"
+ndarray = "0.15.6"
 image = "0.23.12"
 nshare = {version = "0.2.0", features=["image", "ndarray"]}
 rdrand = "0.8.0"
